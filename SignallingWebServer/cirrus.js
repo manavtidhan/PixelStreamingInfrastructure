@@ -161,7 +161,16 @@ try {
 }
 
 if (config.UseHTTPS) {
-	app.use(helmet());
+	
+	app.use(
+		helmet({
+		  contentSecurityPolicy: {
+			directives: {
+			  "frame-ancestors": ["'self'", "https://digitaltranscend.io"],
+			},
+		  },
+		})
+	  );	
 
 	app.use(hsts({
 		maxAge: 15552000  // 180 days in seconds
